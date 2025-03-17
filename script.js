@@ -1,7 +1,10 @@
+let startIndex = 1; 
+const limit = 40; 
+const maxPokemon = 151;
+
 async function inIt() {
-    for (let pokemonId = 1; pokemonId <= 40; pokemonId++) {
-        await renderPokemon(pokemonId);
-    }
+    // Initial: Lade die ersten 40 Pokémon
+    await loadMorePokemon();
 }
 
 async function fetchPokemonData(pokemonId) {
@@ -41,3 +44,24 @@ function render(sprite, number, name, types) {
         console.error("Element mit der ID 'content' wurde nicht gefunden.");
     }
 }
+
+async function loadMorePokemon() {
+    // Berechne die End-ID für die aktuelle Ladung
+    const endIndex = Math.min(startIndex + limit - 1, maxPokemon);
+
+    // Lade Pokémon im Bereich [startIndex, endIndex]
+    for (let pokemonId = startIndex; pokemonId <= endIndex; pokemonId++) {
+        await renderPokemon(pokemonId);
+    }
+
+    // Aktualisiere den Startindex für die nächste Ladung
+    startIndex += limit;
+
+    // Deaktiviere den Button, wenn alle Pokémon geladen wurden
+    if (startIndex > maxPokemon) {
+        document.getElementById("loadMore").disabled = true;
+    }
+}
+
+document.getElementById("loadMore").addEventListener("click", loadMorePokemon);
+
