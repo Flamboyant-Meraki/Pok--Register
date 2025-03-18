@@ -1,9 +1,8 @@
 let startIndex = 1; 
-const limit = 40; 
+const limit = 36; 
 const maxPokemon = 151;
 
 async function inIt() {
-    // Initial: Lade die ersten 40 Pokémon
     await loadMorePokemon();
 }
 
@@ -30,34 +29,52 @@ async function renderPokemon(pokemonId) {
 
 function render(sprite, number, name, types) {
     const registerElements = document.getElementById("content");
+    const { primaryColor, secondaryColor } = splitColors(types);
     const html = `
         <div class="registerElement">
             <img class="sprites" src="${sprite}" alt="${name} Sprite">
             <input type="text" value="#${number}" placeholder="Nummer">
             <input type="text" value="${name}" placeholder="Name">
-            <input type="text" value="${types}" placeholder="Typ">
+            <input type="text" value="${types}" placeholder="Typ" style="background: linear-gradient(to right, ${primaryColor}, ${secondaryColor});">
         </div>
     `;
-    if (registerElements) {
-        registerElements.innerHTML += html;
-    } else {
-        console.error("Element mit der ID 'content' wurde nicht gefunden.");
-    }
+    registerElements.innerHTML += html;
 }
 
-async function loadMorePokemon() {
-    // Berechne die End-ID für die aktuelle Ladung
-    const endIndex = Math.min(startIndex + limit - 1, maxPokemon);
+function splitColors(types) {
+    const typeList = types.split(", ");
+    const primaryColor = typeColors[typeList[0]] || "#DDDDDD";
+    const secondaryColor = typeList[1] ? typeColors[typeList[1]] : primaryColor;
+    return { primaryColor, secondaryColor };
+}
 
-    // Lade Pokémon im Bereich [startIndex, endIndex]
+const typeColors = {
+    fire: "#F08030",
+    water: "#6890F0",
+    grass: "#78C850",
+    electric: "#F8D030",
+    normal: "#A8A878",
+    ground: "#E0C068",
+    rock: "#B8A038",
+    psychic: "#F85888",
+    ice: "#98D8D8",
+    dark: "#705848",
+    fairy: "#EE99AC",
+    dragon: "#7038F8",
+    flying: "#A890F0",
+    bug: "#A8B820",
+    ghost: "#705898",
+    poison: "#A040A0",
+    steel: "#B8B8D0",
+    fighting: "#C03028"
+};
+
+async function loadMorePokemon() {
+    const endIndex = Math.min(startIndex + limit - 1, maxPokemon);
     for (let pokemonId = startIndex; pokemonId <= endIndex; pokemonId++) {
         await renderPokemon(pokemonId);
     }
-
-    // Aktualisiere den Startindex für die nächste Ladung
     startIndex += limit;
-
-    // Deaktiviere den Button, wenn alle Pokémon geladen wurden
     if (startIndex > maxPokemon) {
         document.getElementById("loadMore").disabled = true;
     }

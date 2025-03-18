@@ -59,7 +59,7 @@ section{
     min-height: 100dvh;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     display: grid;
     place-items: center;
     margin-top: 20px;
@@ -71,8 +71,8 @@ section{
     align-items: center;
     flex-direction: column;
     background-color: white;
-    max-width: 150px;
-    height: 100px;
+    max-width: 170px;
+    height: 110px;
     border-radius: 10px;
     gap: 5px;
     position: relative;
@@ -85,10 +85,25 @@ section{
 .registerElement input{
     border: none;
     outline: none;
-    /* background-color: aqua; */
-    width: calc(100% - 20px);
+    width: calc(100% - 60px);
     text-align: center;
     cursor: pointer;
+    text-transform: capitalize;
+    background-color: rgba(240, 248, 255, 0);
+}
+.registerElement input:nth-child(2){
+    font-size: 15px;
+}
+.registerElement input:nth-child(3){
+    font-size: 16px;
+    font-weight: bold;
+}
+.registerElement input:nth-child(4){
+    color: white;
+    font-weight: 600;
+    background: linear-gradient(to right, rgb(147, 217, 254), rgba(110, 204, 254, 0.301));
+    border-radius: 50px;
+    height: 22px;
 }
 
 .sprites{

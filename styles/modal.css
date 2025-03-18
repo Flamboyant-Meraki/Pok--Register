@@ -1,5 +1,7 @@
 .modal {
     position: fixed;
+    justify-content: center;
+    align-items: center;
     z-index: 1000;
     left: 0;
     top: 0;
@@ -8,7 +10,6 @@
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
     display: none;
-    place-items: center;
 }
 
 .modal-content {
@@ -16,7 +17,7 @@
     padding: 20px;
     border: none;
     width: 70%;
-    height: calc(100dvh - 40px);
+    height: calc(100dvh - 80px);
     text-align: center;
     border-radius: 30px;
 }
@@ -27,6 +28,7 @@
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 .close:hover,
@@ -34,4 +36,43 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+.modalOrder{
+height: 100%;
+    display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.overview{
+width: 40%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+flex-direction: column;
+margin-top: 30px;
+}
+.spriteBackground{
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(to top, rgb(147, 217, 254), rgba(110, 204, 254, 0.301));
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin-bottom: 20px;
+}
+#modalSprite{
+    width: 200px;
+    margin-bottom: 30px;
+}
+
+.details{
+width: 60%;
+height: 600px;
+border-radius: 20px;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+opacity: 30%;
 }

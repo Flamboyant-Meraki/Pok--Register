@@ -21,19 +21,29 @@
       </div>
 
       <button id="loadMore">Mehr laden</button>
-      
+
       <!-- PokéModal -->
       <div id="pokemonModal" class="modal" style="display: none">
         <div class="modal-content">
           <span id="closeModal" class="close">&times;</span>
-          <img id="modalSprite" src="" alt="Pokemon Sprite" />
-          <h2 id="modalName"></h2>
-          <p id="modalNumber"></p>
-          <p id="modalTypes"></p>
+          <div class="modalOrder">
+            <div class="overview">
+              <div class="spriteBackground">
+                <img id="modalSprite" src="" alt="Pokemon Sprite" />
+              </div>
+              <p id="modalNumber"></p>
+              <h2 id="modalName"></h2>
+              <p id="modalTypes"></p>
+            </div>
+            <div class="details">
+              
+            </div>
+          </div>
+          
         </div>
-
       </div>
     </section>
+
     <footer>
       <div class="x-limitation"></div>
     </footer>
