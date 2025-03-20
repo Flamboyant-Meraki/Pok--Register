@@ -13,66 +13,72 @@
 }
 
 .modal-content {
-    background-color: #fff;
+    background: linear-gradient(150deg, #FFFFFF, #b1b1b1);
     padding: 20px;
-    border: none;
-    width: 70%;
+    width: 381px;
     height: calc(100dvh - 80px);
     text-align: center;
     border-radius: 30px;
+    max-width: 890px;
+    max-height: 634px;
 }
 
+.modalNavigation{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#modalNumber{
+    margin: 0;
+    font-size: 24px;
+    color: white;
+}
 .close {
-    color: #aaa;
+    color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
     margin-left: 10px;
 }
-
 .close:hover,
 .close:focus {
-    color: black;
+    color: rgb(230, 51, 51);
     text-decoration: none;
     cursor: pointer;
 }
 
-
-.modalOrder{
-height: 100%;
+.infoChart{
+    background-color: white;
+    margin-top: 180px;
     display: flex;
-justify-content: center;
-align-items: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
 }
-
-.overview{
-width: 40%;
-height: 100%;
-display: flex;
-align-items: center;
-justify-content: flex-start;
-flex-direction: column;
-margin-top: 30px;
+.pokeChoise{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-transform: capitalize;
 }
-.spriteBackground{
-    width: 300px;
-    height: 300px;
-    background: linear-gradient(to top, rgb(147, 217, 254), rgba(110, 204, 254, 0.301));
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    margin-bottom: 20px;
+.pokeChoise button{
+    width: 80px;
+    height: 40px;
+    background-color: white;
+    border: none;
+    border-radius: 50px;
+    box-shadow: rgba(144, 144, 144, 0.35) 0px 3px 5px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+.pokeChoise button:hover{
+    background-color: white;
+    box-shadow: rgba(208, 208, 208, 0.144) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 #modalSprite{
-    width: 200px;
-    margin-bottom: 30px;
-}
-
-.details{
-width: 60%;
-height: 600px;
-border-radius: 20px;
-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-opacity: 30%;
+    width: 70%;
+    margin-top: -200px;
 }

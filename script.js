@@ -1,5 +1,5 @@
 let startIndex = 1; 
-const limit = 36; 
+const limit = 35; 
 const maxPokemon = 151;
 
 async function inIt() {
@@ -31,7 +31,7 @@ function render(sprite, number, name, types) {
     const registerElements = document.getElementById("content");
     const { primaryColor, secondaryColor } = splitColors(types);
     const html = `
-        <div class="registerElement">
+        <div class="registerElement" onclick="openModal(${number}, '${name}', '${sprite}', '${types}')">
             <img class="sprites" src="${sprite}" alt="${name} Sprite">
             <input type="text" value="#${number}" placeholder="Nummer">
             <input type="text" value="${name}" placeholder="Name">
