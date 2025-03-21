@@ -16,6 +16,7 @@ function openModal(number, name, sprite, types) {
     document.getElementById("modalTypes").innerText = types;
 
     modal.style.display = "flex"; // Modal anzeigen
+    updateModal(number);
 }
 
 document.getElementById("closeModal").addEventListener("click", () => {
@@ -41,27 +42,54 @@ async function nextPokemon() {
 }
 
 async function updateModal(pokemonId) {
-    const data = await fetchPokemonData(pokemonId); // Funktion, die Pokémon-Daten lädt
+    const data = await fetchPokemonData(pokemonId); // Ruft Pokémon-Daten aus der API ab
     if (data) {
         const sprite = data.sprites.other.home.front_default;
         const name = data.name;
         const types = data.types.map(typeInfo => typeInfo.type.name).join(", ");
-        
-        // Extrahiere den ersten Typ
         const primaryType = data.types[0]?.type.name;
         const backgroundColor = modalTypeColors[primaryType] || "linear-gradient(to right, #DDDDDD, #FFFFFF)";
 
-        // Aktualisiere das Modal
-        const modal = document.getElementById("modalContent");
-        modal.style.background = backgroundColor; // Hintergrundfarbe setzen
+        // Hintergrundfarbe für modal-content setzen
+        const modal = document.getElementById("pokemonModal");
+        const modalContent = modal.querySelector(".modal-content");
+        modalContent.style.background = backgroundColor;
+
+        // Grundinformationen aktualisieren
         document.getElementById("modalSprite").src = sprite;
         document.getElementById("modalName").innerText = name;
         document.getElementById("modalNumber").innerText = `#${pokemonId}`;
         document.getElementById("modalTypes").innerText = types;
 
-    } else {
-        console.error("Fehler beim Laden der Pokémon-Daten.");
-    }
+        // Zusätzliche Informationen anzeigen
+        document.getElementById("height").innerText = `${data.height / 10} m`;
+        document.getElementById("weight").innerText = `${data.weight / 10} kg`;
+        
+        // Tabelle für die Statistiken aktualisieren
+        const statsBody = document.getElementById("stats-body");
+        statsBody.innerHTML = ""; // Vorherige Inhalte löschen
+
+        data.stats.forEach(stat => {
+            const row = document.createElement("tr");
+
+            const statNameCell = document.createElement("td");
+            statNameCell.innerText = stat.stat.name; // Name des Werts (z. B. HP, Attack)
+
+            const statValueCell = document.createElement("td");
+            statValueCell.innerText = stat.base_stat; // Wert des Stats
+
+            row.appendChild(statNameCell);
+            row.appendChild(statValueCell);
+            statsBody.appendChild(row);
+        });
+
+        // Beschreibung abrufen und anzeigen
+        const description = await fetchPokemonDescription(pokemonId);
+        const rightDetails = document.querySelector(".right-details");
+        rightDetails.innerHTML = `<h3>Description</h3><p>${description}</p>`;
+
+        modal.style.display = "flex"; // Modal sichtbar machen
+    } 
 }
 
 const modalTypeColors = {
@@ -85,3 +113,55 @@ const modalTypeColors = {
     fighting: "linear-gradient(30deg,rgb(120, 52, 39),rgb(199, 138, 135))"
 };
 
+async function fetchEvolutionData(pokemonId) {
+    try {
+        // Abruf der Spezies-Daten
+        const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
+        if (!speciesResponse.ok) {
+            throw new Error(`Fehler beim Abrufen der Spezies-Daten für ID ${pokemonId}`);
+        }
+        const speciesData = await speciesResponse.json();
+
+        // Abruf der Evolutionskette
+        const evolutionChainUrl = speciesData.evolution_chain.url;
+        const evolutionResponse = await fetch(evolutionChainUrl);
+        if (!evolutionResponse.ok) {
+            throw new Error("Fehler beim Abrufen der Evolutionskette.");
+        }
+        const evolutionData = await evolutionResponse.json();
+        return evolutionData.chain; // Rückgabe des Evolutionspfads
+    } catch (error) {
+        return null;
+    }
+}
+
+function parseEvolutionChain(chain) {
+    const evolutions = [];
+
+    let currentStage = chain;
+    while (currentStage) {
+        evolutions.push(currentStage.species.name); // Name der aktuellen Spezies hinzufügen
+        currentStage = currentStage.evolves_to[0]; // Nächste Evolutionsstufe
+    }
+
+    return evolutions; // Liste der Evolutionsstufen
+}
+
+async function fetchPokemonDescription(pokemonId) {
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
+        const speciesData = await response.json();
+
+        // Filtere die Beschreibung in Englisch
+        const flavorTextEntry = speciesData.flavor_text_entries.find(entry => entry.language.name === "en");
+        if (flavorTextEntry) {
+            return flavorTextEntry.flavor_text
+                .replace(/\n/g, " ")          // Ersetze Zeilenumbrüche durch Leerzeichen
+                .replace(/\f/g, " ")          // Ersetze Seitenumbrüche (falls vorhanden)
+                .replace(/↖|↗|↘|↙/g, "");   // Entferne Pfeile
+        }
+        return "No description available.";
+    } catch (error) {
+        return "No description is currently available for this Pokémon in the database.";
+    }
+}

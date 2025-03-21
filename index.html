@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,7 @@
   <body onload="inIt()">
     <header>
       <div class="x-limitation headerFlex">
-        <h1>Welches Pokémon suchst du?</h1>
+        <h1>Which Pokémon are you searching for?</h1>
         <input type="search" placeholder="Suchen" />
       </div>
     </header>
@@ -26,7 +26,9 @@
       <div id="pokemonModal" class="modal" style="display: none">
         <div class="modal-content" id="modalContent">
           <div class="modalNavigation">
-            <button></button>
+            <button
+              style="background-color: rgba(210, 180, 140, 0); border: none"
+            ></button>
             <p id="modalNumber"></p>
             <span id="closeModal" class="close">&times;</span>
           </div>
@@ -41,8 +43,31 @@
               </div>
               <button onclick="nextPokemon()">next</button>
             </div>
+            <div class="showcaseHeads">
+              <p>HEIGHT</p>
+              <p>WEIGHT</p>
+            </div>
+            <div class="showcase">
+              <p id="height"></p>
+              <p id="weight"></p>
+            </div>
+            <div class="splitline"></div>
             <section class="details">
-              <h3>Information</h3>
+              <div class="left-details">
+                <h3 style="margin-block-end: 14px; margin-block-start: 17px; font-size: 16px;">Stats</h3>
+                <table id="stats-table">
+                  <thead>
+                    <tr>
+                    </tr>
+                  </thead>
+                  <tbody id="stats-body">
+                    <!-- Dynamisch eingefügte Statistiken kommen hierhin -->
+                  </tbody>
+                </table>
+              </div>
+              <div class="right-details">
+
+              </div>
             </section>
           </div>
         </div>
