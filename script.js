@@ -54,15 +54,44 @@ function splitColors(types) {
 
 
 async function loadMorePokemon() {
-    const endIndex = Math.min(startIndex + limit - 1, maxPokemon);
-    for (let pokemonId = startIndex; pokemonId <= endIndex; pokemonId++) {
-        await renderPokemon(pokemonId);
+    showLoadingScreen(); 
+    const endIndex = calculateEndIndex();
+    await loadBatch(startIndex, endIndex);
+    updateStartIndex();
+    disableButtonIfNoMorePokemon();
+    hideLoadingScreen(); 
+}
+
+function showLoadingScreen() {
+    const loadingScreen = document.getElementById("loading-screen");
+    loadingScreen.style.display = "flex";
+}
+
+function hideLoadingScreen() {
+    const loadingScreen = document.getElementById("loading-screen");
+    loadingScreen.style.display = "none";
+}
+
+function calculateEndIndex() {
+    return Math.min(startIndex + limit - 1, maxPokemon);
+}
+
+async function loadBatch(start, end) {
+    for (let pokemonId = start; pokemonId <= end; pokemonId++) {
+        await renderPokemon(pokemonId); 
     }
-    startIndex += limit;
+}
+
+function updateStartIndex() {
+    startIndex += limit; 
+}
+
+function disableButtonIfNoMorePokemon() {
     if (startIndex > maxPokemon) {
         document.getElementById("loadMore").disabled = true;
     }
 }
+
 
 document.getElementById("loadMore").addEventListener("click", loadMorePokemon);
 
