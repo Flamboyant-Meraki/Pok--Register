@@ -8,19 +8,23 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/modal.css" />
   </head>
+
   <body onload="inIt()">
     <header>
       <div class="x-limitation headerFlex">
         <h1>Which Pokémon are you searching for?</h1>
-        <input type="search" placeholder="Suchen" />
+        <input
+          id="search-bar"
+          type="text"
+          placeholder="Search"
+          onkeyup="filterPokemon()"
+        />
       </div>
     </header>
     <section>
       <div class="x-limitation" id="content">
         <!-- Pokémon -->
       </div>
-
-      <button id="loadMore">Mehr laden</button>
 
       <!-- PokéModal -->
       <div id="pokemonModal" class="modal" style="display: none">
@@ -54,20 +58,25 @@
             <div class="splitline"></div>
             <section class="details">
               <div class="left-details">
-                <h3 style="margin-block-end: 14px; margin-block-start: 17px; font-size: 16px;">Stats</h3>
+                <h3
+                  style="
+                    margin-block-end: 14px;
+                    margin-block-start: 17px;
+                    font-size: 16px;
+                  "
+                >
+                  Stats
+                </h3>
                 <table id="stats-table">
                   <thead>
-                    <tr>
-                    </tr>
+                    <tr></tr>
                   </thead>
                   <tbody id="stats-body">
                     <!-- Dynamisch eingefügte Statistiken kommen hierhin -->
                   </tbody>
                 </table>
               </div>
-              <div class="right-details">
-
-              </div>
+              <div class="right-details"></div>
             </section>
           </div>
         </div>
@@ -75,9 +84,12 @@
     </section>
 
     <footer>
-      <div class="x-limitation"></div>
+      <div class="x-limitation footerContent">
+        <button id="loadMore">Load more!</button>
+      </div>
     </footer>
   </body>
   <script src="./script.js"></script>
   <script src="scripts/modal.js"></script>
+  <script src="scripts/database.js"></script>
 </html>

@@ -27,7 +27,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
 }
 
 #modalNumber{
@@ -38,8 +38,7 @@
 .close {
     color: white;
     float: top;
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 32px;
     cursor: pointer;
 }
 .close:hover,

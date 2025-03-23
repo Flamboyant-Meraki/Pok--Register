@@ -7,12 +7,16 @@ async function inIt() {
 }
 
 async function fetchPokemonData(pokemonId) {
+    try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         if (!response.ok) {
             throw new Error(`Fehler beim Abrufen von Pokémon mit der ID ${pokemonId}`);
         }
         const data = await response.json();
         return data;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 async function renderPokemon(pokemonId) {
@@ -48,26 +52,6 @@ function splitColors(types) {
     return { primaryColor, secondaryColor };
 }
 
-const typeColors = {
-    fire: "#F08030",
-    water: "#6890F0",
-    grass: "#78C850",
-    electric: "#F8D030",
-    normal: "#A8A878",
-    ground: "#E0C068",
-    rock: "#B8A038",
-    psychic: "#F85888",
-    ice: "#98D8D8",
-    dark: "#705848",
-    fairy: "#EE99AC",
-    dragon: "#7038F8",
-    flying: "#A890F0",
-    bug: "#A8B820",
-    ghost: "#705898",
-    poison: "#A040A0",
-    steel: "#B8B8D0",
-    fighting: "#C03028"
-};
 
 async function loadMorePokemon() {
     const endIndex = Math.min(startIndex + limit - 1, maxPokemon);
@@ -82,3 +66,17 @@ async function loadMorePokemon() {
 
 document.getElementById("loadMore").addEventListener("click", loadMorePokemon);
 
+function filterPokemon() {
+    const input = document.getElementById("search-bar").value.toLowerCase();
+    const pokemonElements = document.querySelectorAll(".registerElement");
+    pokemonElements.forEach(element => {
+        const onClickValue = element.getAttribute("onclick"); 
+        const name = onClickValue.match(/'([^']+)'/)[1].toLowerCase(); 
+
+        if (name.includes(input)) {
+            element.style.display = "flex";
+        } else {
+            element.style.display = "none";
+        }
+    });
+}
