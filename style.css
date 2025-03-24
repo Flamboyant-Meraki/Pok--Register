@@ -59,12 +59,36 @@ section {
   width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   display: grid;
-  justify-content: center; /* Horizontal zentriert */
-  align-content: start; /* Inhalte oben ausrichten */
+  justify-content: center; 
+  align-content: start;
   place-items: center;
-  margin-top: 20px;
+  padding-top: 20px;
   margin-bottom: 40px;
   overflow: hidden;
+}
+#content::before{
+  opacity: 55%;
+  z-index: -2;
+  content: '';
+  position: fixed;
+  top: -6%;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  background-image: url(./assets/imgs/PokSymb.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: auto;
+  animation: drehen 22s linear infinite;
+}
+@keyframes drehen {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .registerElement {

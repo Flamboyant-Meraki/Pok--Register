@@ -1,9 +1,9 @@
 function openModal(number, name, sprite, types) {
-    currentPokemonId = number; // Speichere die aktuelle Pokémon-ID
+    currentPokemonId = number; 
     setModalBackground(types);
     setModalContent(number, name, sprite, types);
     showModal();
-    updateModal(number); // Zusätzliche Daten laden
+    updateModal(number); 
 }
 
 function setModalBackground(types) {
@@ -22,7 +22,7 @@ function setModalContent(number, name, sprite, types) {
 
 function showModal() {
     const modal = document.getElementById("pokemonModal");
-    modal.style.display = "flex"; // Modal anzeigen
+    modal.style.display = "flex"; 
 }
 
 
@@ -75,7 +75,7 @@ function updateModalAppearance(data) {
 
 function updateModalStats(data) {
     const statsBody = document.getElementById("stats-body");
-    statsBody.innerHTML = ""; // Vorherige Inhalte löschen
+    statsBody.innerHTML = ""; 
 
     data.stats.forEach(stat => {
         const row = document.createElement("tr");
