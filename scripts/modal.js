@@ -25,7 +25,6 @@ function showModal() {
     modal.style.display = "flex"; 
 }
 
-
 document.getElementById("closeModal").addEventListener("click", () => {
     document.getElementById("pokemonModal").style.display = "none";
 });
@@ -37,7 +36,6 @@ window.onclick = (event) => {
     }
 };
 
-
 async function lastPokemon() {
     currentPokemonId = currentPokemonId === 1 ? maxPokemon : currentPokemonId - 1;
     await updateModal(currentPokemonId);
@@ -47,7 +45,6 @@ async function nextPokemon() {
     currentPokemonId = currentPokemonId === maxPokemon ? 1 : currentPokemonId + 1;
     await updateModal(currentPokemonId);
 }
-
 
 async function updateModal(pokemonId) {
     const data = await fetchPokemonData(pokemonId);
@@ -94,7 +91,6 @@ async function updateModalDescription(pokemonId) {
     const rightDetails = document.querySelector(".right-details");
     rightDetails.innerHTML = `<h3>Description</h3><p>${description}</p>`;
 }
-
 
 async function fetchPokemonDescription(pokemonId) {
     try {

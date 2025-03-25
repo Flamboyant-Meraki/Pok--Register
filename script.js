@@ -2,6 +2,8 @@ let startIndex = 1;
 const limit = 35; 
 const maxPokemon = 151;
 
+document.getElementById("loadMore").addEventListener("click", loadMorePokemon);
+
 async function inIt() {
     await loadMorePokemon();
 }
@@ -34,7 +36,13 @@ async function renderPokemon(pokemonId) {
 function render(sprite, number, name, types) {
     const registerElements = document.getElementById("content");
     const { primaryColor, secondaryColor } = splitColors(types);
-    const html = `
+    const html = createTemplate(sprite, number, name, types, primaryColor, secondaryColor);
+
+    registerElements.innerHTML += html;
+}
+
+function createTemplate(sprite, number, name, types, primaryColor, secondaryColor) {
+    return `
         <div class="registerElement" onclick="openModal(${number}, '${name}', '${sprite}', '${types}')">
             <img class="sprites" src="${sprite}" alt="${name} Sprite">
             <input type="text" value="#${number}" placeholder="Nummer">
@@ -42,7 +50,6 @@ function render(sprite, number, name, types) {
             <input type="text" value="${types}" placeholder="Typ" style="background: linear-gradient(to right, ${primaryColor}, ${secondaryColor});">
         </div>
     `;
-    registerElements.innerHTML += html;
 }
 
 function splitColors(types) {
@@ -51,7 +58,6 @@ function splitColors(types) {
     const secondaryColor = typeList[1] ? typeColors[typeList[1]] : primaryColor;
     return { primaryColor, secondaryColor };
 }
-
 
 async function loadMorePokemon() {
     showLoadingScreen(); 
@@ -91,9 +97,6 @@ function disableButtonIfNoMorePokemon() {
         document.getElementById("loadMore").disabled = true;
     }
 }
-
-
-document.getElementById("loadMore").addEventListener("click", loadMorePokemon);
 
 function filterPokemon() {
     const input = document.getElementById("search-bar").value.toLowerCase();

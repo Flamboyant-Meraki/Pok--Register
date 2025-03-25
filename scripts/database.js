@@ -20,7 +20,6 @@
     fighting: "#C03028",
   };
 
-  
   const modalTypeColors = {
     fire: "linear-gradient(30deg, #F08030, #F5AC78)",
     water: "linear-gradient(30deg, #6890F0, #98D8D8)",
