@@ -51,7 +51,7 @@
     font-size: 24px;
   }
   .modal-content{
-    width: calc(100dvw - 56px);
+    width: calc(100dvw - 40px);
   }
 }
 
@@ -62,9 +62,8 @@
         flex-direction: column-reverse;
     }
     .infoChart{
-        height: calc(70dvh - 25px);
-        width: calc(100dvw - 85px);
-        margin-top: calc(0% + 40%);
+        height: 500px;
+        margin-top: 40%;
     }
     .left-details{
         width: calc(100dvw - 105px);
