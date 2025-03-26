@@ -14,13 +14,13 @@ header {
 header h1 {
   color: white;
   margin-left: 25px;
-  margin-right: 225px;
+  margin-right: 355px;
   margin-block-start: 0;
   margin-block-end: 0;
 }
 header input {
   height: 40px;
-  width: calc(100% - 288px);
+  width: calc(100% - 88px);
   max-width: 900px;
   margin: 20px;
   border-radius: 50px;
@@ -44,8 +44,8 @@ header input {
   display: flex;
   justify-content: end;
   flex-direction: column;
-  background-image: url(./assets/imgs/PokFavSymb.png);
-  background-size: 200px;
+  background-image: url(./assets/imgs/LogoKanto151.png);
+  background-size: 400px;
   background-repeat: no-repeat;
   background-position: right;
 }

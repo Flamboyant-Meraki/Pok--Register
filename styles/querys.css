@@ -1,4 +1,9 @@
-
+@media (max-width: 630px){
+  .headerFlex h1{
+    font-size: 24px;
+  }
+  
+}
 
 @media (max-width: 560px){
   .headerFlex h1{
@@ -68,5 +73,9 @@
     }
     .right-details{
         width: calc(100dvw - 105px);
+    }
+    .headerFlex{
+      background-position: center;
+      background-size: 300px;
     }
 }
