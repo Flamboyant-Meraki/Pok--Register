@@ -1,6 +1,6 @@
 # Pokédex App
 
-KANTO151 is a responsive, browser-based Pokédex built. It fetches data from the PokéAPI and displays detailed information about Pokémon, including stats, types, and images. Designed with clean UI and modular architecture.
+**KANTO151** is a responsive, browser-based Pokédex built. It fetches data from the PokéAPI and displays detailed information about Pokémon, including stats, types, and images. Designed with clean UI and modular architecture.
 
 ## 🚀 Features
 
